@@ -10,9 +10,13 @@ class MainView {
     protected $vars = array();
     public $url = NULL;
     public $_link = NULL;
+    public $admin = NULL;
     public function __construct($them_dir = null) {
         if ($them_dir !== null) {
             $this->$them_dir = $them_dir;
+        }
+        if(!$this->admin) {
+            $this->admin =  '<a href = "?controller=admin&action=login" ><i class="icon-user" ></i > Login </a >';
         }
     }
 
@@ -63,7 +67,7 @@ class MainView {
     }
 
     public function widgetURL(){
-        if(!$this->url) $this->url = $this->base_url(NULL, TRUE);
+        if(!$this->url) $this->url = $this->base_url(TRUE);
         return $this->url;
     }
 
@@ -86,5 +90,25 @@ class MainView {
         return "<a $active href='$href'>$column_name</a>";
     }
 
+    public function backButton(){
+       $html='<a href="'.$this->widgetUrl().'" 
+            class="btn btn-invert pull-right" style="margin:6px 5px"> 
+            Back to Homepage <i class="icon-share-alt"></i></a>';
+        return $html;
+    }
+
+    public function loginUrl(){
+        if(isset($_SESSION['status']) && $_SESSION['status']==1){
+            $this->admin = '<a href = "?controller=admin&action=logout" ><i class="icon-user" ></i > Logout ['.$_SESSION['admin'].']</a>';
+        }
+        return $this->admin;
+    }
+
+    public function is_admin(){
+        if(isset($_SESSION['status']) && $_SESSION['status']==1) {
+            return 1;
+        }
+        return 0;
+    }
 }
 ?>

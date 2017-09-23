@@ -39,6 +39,14 @@ class TasksService {
         }
     }
 
+    public function getTaskById($id){
+        if($id){
+            $sql = "SELECT * FROM tasks WHERE id = '".$id."'";
+            return $this->_db->queryRow($sql);
+        }
+        return 0;
+    }
+
     public function getTotal(){
         try{
             $sql = 'SELECT * FROM tasks';
@@ -49,50 +57,7 @@ class TasksService {
         }
     }
 
-
-    public function getAllContacts() {
-        try {
-            $this->_db->select();
-            //$this->openDb();
-            //$res = $this->contactsGateway->selectAll($order);
-            //$this->closeDb();
-            //return $res;
-        } catch (Exception $e) {
-            //$this->closeDb();
-            throw $e;
-        }
-    }
-
-//    public function selectAll($order) {
-//        if ( !isset($order) ) {
-//            $order = "name";
-//        }
-//        $dbOrder =  mysql_real_escape_string($order);
-//        $dbres = mysql_query("SELECT * FROM contacts ORDER BY $dbOrder ASC");
-//
-//        $contacts = array();
-//        while ( ($obj = mysql_fetch_object($dbres)) != NULL ) {
-//            $contacts[] = $obj;
-//        }
-//
-//        return $contacts;
-//    }
-
-
-    public function getContact($id) {
-        try {
-            $this->openDb();
-            $res = $this->contactsGateway->selectById($id);
-            $this->closeDb();
-            return $res;
-        } catch (Exception $e) {
-            $this->closeDb();
-            throw $e;
-        }
-        return $this->contactsGateway->find($id);
-    }
-
-    private function validateTaskParams( $name, $email, $task) {
+  private function validateTaskParams( $name, $email, $task) {
         $errors = array();
         if ( !isset($name) || empty($name)) {
             $errors[] = 'Name is required';
@@ -123,21 +88,35 @@ class TasksService {
                         );
             $lastId = $this->_db->insert('tasks', $ins_array);
             return $lastId;
+        }catch (Exception $e) {
+            $this->closeDb();
+            throw $e;
+        }
+
+    }
+
+    public function deleteById($id){
+        try {
+            $sql = "DELETE FROM tasks
+               WHERE id = '$id'";
+            return $this->_db->delete($sql);
         } catch (Exception $e) {
             $this->closeDb();
             throw $e;
         }
     }
 
-    public function deleteContact( $id ) {
+    public function updateById($name, $email, $task, $image, $status, $id){
         try {
-            $this->openDb();
-            $res = $this->contactsGateway->delete($id);
-            $this->closeDb();
+            $this->validateTaskParams($name, $email, $task);
+            $sql = "UPDATE tasks 
+                    SET name='$name', email='$email', tasks='$task', image='$image', status='$status'
+                    WHERE id = '$id'";
+            return $this->_db->update($sql);
         } catch (Exception $e) {
             $this->closeDb();
             throw $e;
         }
-    }
+     }
 
 }

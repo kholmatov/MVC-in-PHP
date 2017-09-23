@@ -9,12 +9,12 @@
 class Connection {
 
       private static $_db = NULL;
-
-      private static $config = Array(
+	  
+	  private static $config = Array(
             'host'=>'localhost',
-            'user'=>'root',
-            'password'=>'root',
-            'dbname'=>'mvc',
+            'user'=>'id2895241_kholmatov',
+            'password'=>'nlcBf7pg',
+            'dbname'=>'id2895241_kholmatov_db',
       );
 
       public function __construct() {
@@ -40,6 +40,11 @@ class Connection {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
 
+      public function queryRow($sql){
+          $stmt = self::$_db->query($sql);
+          return $stmt->fetch(PDO::FETCH_ASSOC);
+      }
+
       public function queryTotal($sql){
           $stmt = self::$_db->query($sql);
           return $stmt->rowCount();
@@ -52,6 +57,14 @@ class Connection {
           foreach($ins_array as $key => &$value) $stmt->bindParam(':'.$key, $value);
           $stmt->execute();
           return self::$_db->lastInsertId();
+      }
+
+      public function delete($sql){
+          return self::$_db->exec($sql);
+      }
+      public function update($sql){
+          $stmt = self::$_db->prepare($sql);
+         return $stmt->execute();
       }
 
       public function add_dote($str){

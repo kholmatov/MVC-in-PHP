@@ -1,13 +1,4 @@
-﻿<?php
-/**
-* acResizeImage
-* 
-* Класс для изменения размеров изображений. Реализованы различные методы ресайза, кроп, а также создание миниатюр.
-* 
-* @author Загорцев Андрей Михайлович <freeron@yandex.ru>
-* @version 1.0
-*/
-
+<?php
 class acResizeImage
 {
 	private $image;

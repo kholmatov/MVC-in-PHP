@@ -23,6 +23,7 @@
 <link href="<?=$this->widgetURL()?>assets/them/css/pages/dashboard.css" rel="stylesheet">
 <script src="<?=$this->widgetURL()?>assets/them/js/jquery-1.7.2.min.js"></script>
 <script src="<?=$this->widgetURL()?>assets/them/js/bootstrap.js"></script>
+<script src="<?=$this->widgetURL()?>assets/them/js/bootbox.min.js"></script>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -39,21 +40,7 @@
             <div class="nav-collapse">
                 <ul class="nav pull-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-cog"></i> Account <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:;">Settings</a></li>
-                            <li><a href="javascript:;">Help</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i> Username <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:;">Profile</a></li>
-                            <li>
-                                <a href="">logout</a>
-                            </li>
-                        </ul>
+                       <?= $this->loginUrl() ?>
                     </li>
                 </ul>
                 <!--                    <form class="navbar-search pull-right">-->

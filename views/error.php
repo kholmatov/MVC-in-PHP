@@ -6,16 +6,20 @@
  * Time: 13:56
  */
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Application error</title>
-</head>
-<body>
-<h1><?php print htmlentities($title) ?></h1>
-<p>
-    <?php print htmlentities($message) ?>
-</p>
-</body>
-</html>
+
+<div class="row">
+		
+		<div class="span12">
+			
+			<div class="error-container">
+				<h1><?= htmlentities($this->title) ?></h1>
+				<div class="error-details">
+					<?= htmlentities($this->message) ?>
+				</div> <!-- /error-details -->
+				
+							
+			</div> <!-- /error-container -->			
+			
+		</div> <!-- /span12 -->
+		
+	</div> <!-- /row -->
